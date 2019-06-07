@@ -9,14 +9,14 @@ app.use(express.json());
 app.use(routes);
 
 
-app.get('/', (req, res) => {
-    res.send('Hello Woreeeeld!')
-});
-app.post('/', (req, res) => {
-    res.send(req.body)
-});
-
-
 app.listen(3000, () => {
-    console.log('Example app listening on port 3000!')
+    console.log('Up and running')
 });
+
+// Require external modules
+const mongoose = require("mongoose");
+// Connect to DB
+
+mongoose.connect('mongodb://localhost/cinemas')
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
