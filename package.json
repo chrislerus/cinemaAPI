@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js ./src/index.js",
-    "test": "mocha"
+    "start": "PORT=3000 DB=movies ./node_modules/nodemon/bin/nodemon.js ./src/index.js",
+    "test": "PORT=8888 DB=tests mocha"
   },
   "author": "",
   "license": "ISC",
@@ -15,8 +15,13 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "boom": "^7.3.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.5.13"
+    "mocha": "^6.1.4",
+    "mongo-mock": "^3.7.1",
+    "mongoose": "^5.5.13",
+    "sinon": "^7.3.2"
   }
 }
