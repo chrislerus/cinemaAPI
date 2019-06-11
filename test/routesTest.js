@@ -2,10 +2,37 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 let server = require('../src/index');
 const mongoose = require('mongoose');
-const Movie = require('../src/models/movie')
+const Movie = require('../src/models/movie');
+const MongoMemoryServer = require('mongodb-memory-server').default;
+
+
+const mongod = new MongoMemoryServer();
+const uri = "mongodb://localhost/tests";
 
 mongoose.Promise = global.Promise;
 
+mongod.getConnectionString().then((mongoUri) => {
+    const mongooseOpts = {
+        // options for mongoose 4.11.3 and above
+        autoReconnect: true,
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 1000,
+    };
+
+    mongoose.connect(mongoUri, mongooseOpts);
+
+    mongoose.connection.on('error', (e) => {
+        if (e.message.code === 'ETIMEDOUT') {
+            console.log(e);
+            mongoose.connect(mongoUri, mongooseOpts);
+        }
+        console.log(e);
+    });
+
+    mongoose.connection.once('open', () => {
+        console.log(`MongoDB successfully connected to ${mongoUri}`);
+    });
+});
 
 chai.use(chaiHttp)
 chai.should()

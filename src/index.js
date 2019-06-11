@@ -7,9 +7,12 @@ const routes = require('./routes');
 // Require external modules
 const mongoose = require("mongoose");
 // Connect to DB
-mongoose.connect('mongodb://localhost/' + process.env.DB)
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
+
+if (process.env.DB === "movies") {
+    mongoose.connect('mongodb://localhost/' + process.env.DB)
+        .then(() => console.log('MongoDB connected'))
+        .catch(err => console.log(err));
+}
 
 
 app.use(cors());
