@@ -82,14 +82,15 @@ describe("Basic routes", () => {
             it("should create and store one movie", (done) => {
                 chai.request(server)
                     .post('/api/movies')
-                    .send({
+                    .send([{
                         "name": "Pulp Fiction Posted",
                         "date_exp": 1559637543,
                         "img_url": "https://www.ocs.fr/sites/default/files/styles/alternative/public/programs/alternatives/PULP-FICTION-UMA.jpg"
-                    })
+                    }])
                     .end(function (err, res) {
                         res.should.have.status(200);
-                        JSON.parse(res.text).should.have.property("_id");
+
+                        JSON.parse(res.text)[0].should.have.property("_id");
                         Movie.countDocuments().exec(function (err, len) {
                             chai.assert.equal(len, 2);
                         });

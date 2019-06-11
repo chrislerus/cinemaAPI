@@ -8,7 +8,6 @@ exports.getMovies = function(req,res){
         Movie.find().exec(function (err, records) {
             res.send(JSON.stringify(records));
         });
-        // console.log(movies)
 
     } catch (err) {
         throw boom.boomify(err)
@@ -25,14 +24,23 @@ exports.getSingleMovie = function(req,res) {
     }
 };
 
+
+function saveMovie(params) {
+    const movie = new Movie(params);
+    movie.save(function (err) {
+        if (err) return err;
+    });
+    return movie
+}
+
 // Add a movie
 exports.addMovie = function(req,res) {
     try {
-        const movie = new Movie(req.body);
-        movie.save(function (err) {
-            if (err) return err;
+        l_res = [];
+        req.body.forEach(function (element) {
+            l_res.push(saveMovie(element));
         });
-        return res.send(JSON.stringify(movie))
+        return res.send(JSON.stringify(l_res))
     }
     catch (err) {
         throw boom.boomify(err)
