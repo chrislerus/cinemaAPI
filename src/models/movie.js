@@ -8,7 +8,8 @@ var movieSchema = new Schema({
         unique: true
     },
     date_exp: Number,
-    img_url: String
+    img_url: String,
+    origin: String
 });
 
 module.exports = mongoose.model('Movie', movieSchema);

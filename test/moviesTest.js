@@ -25,7 +25,8 @@ describe('Movie models', function () {
             "name": "Pulp Fiction",
             "date_exp": 1559637543,
             "img_url": "https://www.ocs.fr/sites/default/files/" +
-                "styles/alternative/public/programs/alternatives/PULP-FICTION-UMA.jpg"
+                "styles/alternative/public/programs/alternatives/PULP-FICTION-UMA.jpg",
+            "origin": "Netflix",
         };
         var movie = new Movie(data);
         movie.validate(function(err) {
