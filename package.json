@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "PORT=3000 DB=movies ./node_modules/nodemon/bin/nodemon.js ./src/index.js",
-    "test": "PORT=8888 DB=tests mocha"
+    "test": "PORT=8888 DB=tests mocha --exit"
   },
   "author": "",
   "license": "ISC",
